@@ -9,7 +9,7 @@ function Header() {
   useEffect(() => {});
   return (
     <div className="flex p-4 justify-between bg-secondary shadow-sm">
-      <Image src={"/logo.svg"} width={50} height={50} />
+      <Image alt="logo" src={"/logo.svg"} width={50} height={50} />
       <ul className="hidden md:flex gap-6 items-center">
         <li
           className={`hover:text-orange-500 hover:font-bold transition-all cursor-pointer
