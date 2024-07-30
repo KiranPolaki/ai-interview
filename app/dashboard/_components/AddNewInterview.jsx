@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { db } from "@/utils/db";
+import { useRouter } from "next/router";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -27,6 +28,7 @@ function AddNewInterview() {
   const [jsonResponse, setJsonResponse] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
+  const route = useRouter();
 
   const onSubmit = async (e) => {
     setLoading(true);
@@ -59,6 +61,11 @@ function AddNewInterview() {
       console.log("Inseter ID : ", resp);
     } else {
       console.log("Error cant insert");
+    }
+
+    if (resp) {
+      setOpenDialog(false);
+      route.push(`/dashboard/interview/${resp(0).mockId}`);
     }
 
     setLoading(false);
