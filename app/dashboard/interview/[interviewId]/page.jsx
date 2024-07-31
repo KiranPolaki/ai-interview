@@ -70,7 +70,7 @@ function Interview({ params }) {
         </div>
       </div>
       <div className="flex justify-end items-end">
-        <Button className="bg-orange-500 hover:bg-orange-600">
+        <Button className="bg-orange-500 hover:bg-orange-600 mt-3">
           Start Interview
         </Button>
       </div>
