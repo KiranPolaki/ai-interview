@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import { Camera, Ghost, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Interview({ params }) {
   const [interviewData, setInterviewData] = useState();
@@ -15,7 +16,7 @@ function Interview({ params }) {
   //cant get the data
   useEffect(() => {
     GetInterviewDetails();
-  });
+  }, []);
   const GetInterviewDetails = async () => {
     const result = await db
       .select()
@@ -53,12 +54,14 @@ function Interview({ params }) {
         </div>
         <div>
           {webCamEnabled ? (
-            <Webcam
-              onUserMedia={() => setWebCamEnabled(true)}
-              onUserMediaError={() => setWebCamEnabled(false)}
-              mirrored={true}
-              style={{ height: 300, width: 300 }}
-            />
+            <div className="flex justify-center items-center">
+              <Webcam
+                onUserMedia={() => setWebCamEnabled(true)}
+                onUserMediaError={() => setWebCamEnabled(false)}
+                mirrored={true}
+                style={{ height: 340, width: 300 }}
+              />
+            </div>
           ) : (
             <div className="flex flex-col ">
               <Camera className="h-72 w-full my-7 p-14 bg-secondary rounded-lg border" />
@@ -70,9 +73,11 @@ function Interview({ params }) {
         </div>
       </div>
       <div className="flex justify-end items-end">
-        <Button className="bg-orange-500 hover:bg-orange-600 mt-3">
-          Start Interview
-        </Button>
+        <Link href={`/dashboard/interview/${params.interviewId}/start`}>
+          <Button className="bg-orange-500 hover:bg-orange-600">
+            Start Interview
+          </Button>
+        </Link>
       </div>
     </div>
   );
